@@ -1,0 +1,14 @@
+@media (max-width: 640px) {
+    table {
+        width: 90%;
+        height: 90%;
+    }
+}
+
+
+@media (max-width: 500px) {
+    #content {
+        width: 95%;
+        height: auto;
+    }
+}

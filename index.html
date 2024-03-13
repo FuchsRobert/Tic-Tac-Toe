@@ -4,14 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media.css">
+    <link rel="shortcut icon" href="./img/tictactoe.ico" type="image/x-icon">
     <title>Tic Tac Toe</title>
 </head>
 
 <body onload="init()">
 
     <h1>Tic Tac Toe</h1>
+    <img id="firework" class="firework" src="./img/fireworks.jpg" alt="Feuerwerk">
+    <audio id="fireworkSound" src="./sound/391539_5235550-lq.mp3"></audio>
+
+    <div>
+        <p id="current-player" class="current-player">Spieler 1 ist an der Reihe</p>
+    </div>
+
     <div id="content"></div>
+    
+    <button onclick="restartGame()">Spiel neu starten</button>
     <script src="script.js"></script>
 
 </body>
+
 </html>

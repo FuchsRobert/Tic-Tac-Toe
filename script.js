@@ -11,8 +11,12 @@ let fields = [
 ];
 
 
+let currentPlayer = 1;
+
+
 function init() {
     render();
+    updateCurrentPlayerDisplay();
 }
 
 
@@ -39,6 +43,18 @@ function render() {
 };
 
 
+function updateCurrentPlayerDisplay() {
+    var currentPlayerElement = document.getElementById("current-player");
+    currentPlayerElement.textContent = "Spieler " + currentPlayer + " ist an der Reihe";
+}
+
+
+function switchPlayer() {
+    currentPlayer = (currentPlayer === 1) ? 2 : 1; // Wechsel zwischen Spieler 1 und Spieler 2
+    updateCurrentPlayerDisplay(); // Aktualisiert die Anzeige des aktuellen Spielers nach dem Wechsel
+}
+
+
 function handleClick(index) {
     if (fields[index] === null && !isGameFinished()) {
         fields[index] = getNextSymbol(); // Alternate between 'circle' and 'cross'
@@ -49,9 +65,22 @@ function handleClick(index) {
             const winningCombination = getWinningIndices();
             if (winningCombination.length > 0) {
                 drawWinningLine(winningCombination);
+                showFirework();
             }
         }
+        switchPlayer();
     }
+}
+
+
+function showFirework() {
+    const firework = document.getElementById('firework');
+    const fireworkSound = document.getElementById('fireworkSound');
+    firework.style.display = 'block'; // Feuerwerk anzeigen
+    fireworkSound.play();
+    setTimeout(() => {
+        firework.style.display = 'none'; // Feuerwerk ausblenden nach einer Weile
+    }, 2000); // Zeitspanne für die Anzeige des Feuerwerks
 }
 
 
@@ -111,7 +140,6 @@ function drawWinningLine(combination) {
 }
 
 
-// Get the indices of cells that form the winning combination
 function getWinningIndices() {
     const winningLines = [
         [0, 1, 2], // Horizontal top
@@ -161,3 +189,11 @@ function generateAnimatedXSVG() {
                 </line>
             </svg>`;
 }
+
+
+function restartGame(){
+    fields = [null, null, null, null, null, null, null, null, null,];
+    currentPlayer = 1;
+    render();
+    updateCurrentPlayerDisplay();
+    }
